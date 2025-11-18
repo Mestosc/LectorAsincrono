@@ -44,7 +44,7 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation("org.jetbrains.kotlin:kotlin-reflect") // Es necesario para que el metodo changeTo de los estados funcione
+    implementation(kotlin("reflect")) // Es necesario para que el metodo changeTo de los estados funcione
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
