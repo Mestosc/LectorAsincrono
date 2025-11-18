@@ -24,6 +24,7 @@ class MyViewModel : ViewModel() {
         currentState.value.on_enter()
     }
     fun simularLectura() {
+        changeState(Estados.CARGANDO::class)
         viewModelScope.launch {
             for (i in 1..10) {
                 progresoFlow.value = progresoFlow.value.plus(0.10f).coerceAtMost(1.0f)

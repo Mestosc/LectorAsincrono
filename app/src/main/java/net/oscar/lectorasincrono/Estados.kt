@@ -11,6 +11,7 @@ sealed class Estados(val myViewModel: MyViewModel) {
     abstract fun on_enter();
     abstract fun on_exit();
     val stateTag = "stateTAG"
+    var mensajeTexto = ""
 
     /**
      * Estado IDLE el estado primario cuando no estamos haciendo nada
@@ -18,6 +19,7 @@ sealed class Estados(val myViewModel: MyViewModel) {
     class IDLE(myViewModel: MyViewModel) : Estados(myViewModel) {
         override fun on_enter() {
             Log.d(stateTag,"Estado IDLE")
+            mensajeTexto = "Idle"
         }
 
         override fun on_exit() {
@@ -33,6 +35,7 @@ sealed class Estados(val myViewModel: MyViewModel) {
             Log.d(stateTag,"Estado Cargando")
             myViewModel.progresoFlow.value = 0f
             myViewModel.delay = (1..5).random() * 1000
+            mensajeTexto = "Cargando"
         }
 
         override fun on_exit() {
@@ -43,6 +46,7 @@ sealed class Estados(val myViewModel: MyViewModel) {
     class FINALIZADO(myViewModel: MyViewModel) : Estados(myViewModel) {
         override fun on_enter() {
             Log.d(stateTag,"Estado Finalizando")
+            mensajeTexto = "Finaliazado"
         }
 
         override fun on_exit() {
@@ -52,6 +56,7 @@ sealed class Estados(val myViewModel: MyViewModel) {
     class ERROR(myViewModel: MyViewModel) : Estados(myViewModel) {
         override fun on_enter() {
             Log.d(stateTag,"Estado ERROR")
+            mensajeTexto = "Error"
         }
 
         override fun on_exit() {

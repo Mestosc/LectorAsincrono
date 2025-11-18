@@ -41,13 +41,7 @@ fun MostrarPorcentaje(myViewModel: MyViewModel) {
 @Composable
 fun MostrarEstado(myViewModel: MyViewModel) {
     val estado = myViewModel.currentState.collectAsState().value
-    val estadoTxt = when (estado) {
-        is Estados.CARGANDO -> "Cargando"
-        is Estados.ERROR -> "ERROR"
-        is Estados.FINALIZADO -> "Finalizado"
-        is Estados.IDLE -> "IDLE"
-    }
-        Text(text = estadoTxt)
+        Text(text = estado.mensajeTexto)
 
 }
 @Composable
@@ -65,6 +59,5 @@ fun Progresser(myViewModel: MyViewModel) {
 @Composable
 fun BotonCarga(myViewModel: MyViewModel) {
     Button(onClick = {
-        myViewModel.changeState(Estados.CARGANDO::class)
         myViewModel.simularLectura() }) { Text(text = "Load") }
 }
