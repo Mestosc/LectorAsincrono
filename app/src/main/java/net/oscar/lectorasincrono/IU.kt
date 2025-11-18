@@ -41,7 +41,8 @@ fun MostrarPorcentaje(myViewModel: MyViewModel) {
 @Composable
 fun MostrarEstado(myViewModel: MyViewModel) {
     val estado = myViewModel.currentState.collectAsState().value
-        Text(text = estado.mensajeTexto)
+    val nombre_estado = estado.toString()[0].uppercase() + estado.toString().substring(1).lowercase()
+        Text(text = nombre_estado)
 
 }
 @Composable
