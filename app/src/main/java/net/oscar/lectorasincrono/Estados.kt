@@ -8,8 +8,8 @@ import android.util.Log
  * @param myViewModel El modelo Vista que gestiona los estados y la informacion de la aplicacion
  */
 sealed class Estados(val myViewModel: MyViewModel) {
-    abstract fun on_enter();
-    abstract fun on_exit();
+    abstract fun onEnter();
+    abstract fun onExit();
     val stateTag = "stateTAG"
 
     override fun toString(): String = this::class.simpleName ?: "Estado"
@@ -18,11 +18,11 @@ sealed class Estados(val myViewModel: MyViewModel) {
      * Estado IDLE el estado primario cuando no estamos haciendo nada
      */
     class IDLE(myViewModel: MyViewModel) : Estados(myViewModel) {
-        override fun on_enter() {
+        override fun onEnter() {
             Log.d(stateTag,"Estado IDLE")
         }
 
-        override fun on_exit() {
+        override fun onExit() {
 
         }
     }
@@ -31,32 +31,32 @@ sealed class Estados(val myViewModel: MyViewModel) {
      * Estado Cargando es el estado en el que estamos cuando estamos cargando un archivo ``ficticio``
      */
     class CARGANDO(myViewModel: MyViewModel) : Estados(myViewModel) {
-        override fun on_enter() {
+        override fun onEnter() {
             Log.d(stateTag,"Estado Cargando")
             myViewModel.progresoFlow.value = 0f
             myViewModel.delay = (1..5).random() * 1000
         }
 
-        override fun on_exit() {
+        override fun onExit() {
 
         }
     }
 
     class FINALIZADO(myViewModel: MyViewModel) : Estados(myViewModel) {
-        override fun on_enter() {
+        override fun onEnter() {
             Log.d(stateTag,"Estado Finalizando")
         }
 
-        override fun on_exit() {
+        override fun onExit() {
 
         }
     }
     class ERROR(myViewModel: MyViewModel) : Estados(myViewModel) {
-        override fun on_enter() {
+        override fun onEnter() {
             Log.d(stateTag,"Estado ERROR")
         }
 
-        override fun on_exit() {
+        override fun onExit() {
 
         }
     }

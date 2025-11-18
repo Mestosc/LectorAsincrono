@@ -15,13 +15,13 @@ class MyViewModel : ViewModel() {
         startState()
     }
     fun <T:Estados> changeState(newState: KClass<T>) {
-        currentState.value.on_exit()
+        currentState.value.onExit()
         currentState.value = newState.constructors.first().call(this)
         startState()
     }
 
     fun startState() {
-        currentState.value.on_enter()
+        currentState.value.onEnter()
     }
     fun simularLectura() {
         changeState(Estados.CARGANDO::class)
