@@ -23,6 +23,13 @@ class MyViewModel : ViewModel() {
             stateStart()
         }
     }
+    fun <T:Estados> changeState(newState: T) {
+        if (newState != currentState.value::class) {
+            currentState.value.onExit()
+            currentState.value = newState
+            stateStart()
+        }
+    }
     private fun stateStart() {
         currentState.value.onEnter()
     }
