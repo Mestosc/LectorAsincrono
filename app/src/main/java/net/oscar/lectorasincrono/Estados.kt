@@ -1,6 +1,7 @@
 package net.oscar.lectorasincrono
 
 import android.util.Log
+import kotlin.reflect.KClass
 
 
 /**

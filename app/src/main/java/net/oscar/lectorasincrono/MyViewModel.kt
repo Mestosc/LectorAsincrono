@@ -17,17 +17,16 @@ class MyViewModel : ViewModel() {
     }
     private fun observarCambiosEstado() {
         viewModelScope.launch {
-            currentState.collect { startState() }
+            currentState.collect { state -> state.onEnter()}
         }
     }
     fun <T:Estados> changeState(newState: KClass<T>) {
-        currentState.value.onExit()
-        currentState.value = newState.constructors.first().call(this)
+        if (newState != currentState.value::class) {
+            currentState.value.onExit()
+            currentState.value = newState.constructors.first().call(this)
+        }
     }
 
-    fun startState() {
-        currentState.value.onEnter()
-    }
     fun simularLectura() {
         changeState(Estados.CARGANDO::class)
         viewModelScope.launch {
