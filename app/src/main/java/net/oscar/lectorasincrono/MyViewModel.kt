@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
 
@@ -12,12 +13,16 @@ class MyViewModel : ViewModel() {
     var progresoFlow: MutableStateFlow<Float> = MutableStateFlow(0.0f);
     var delay = 0
     init {
-        startState()
+        observarCambiosEstado()
+    }
+    private fun observarCambiosEstado() {
+        viewModelScope.launch {
+            currentState.collect { startState() }
+        }
     }
     fun <T:Estados> changeState(newState: KClass<T>) {
         currentState.value.onExit()
         currentState.value = newState.constructors.first().call(this)
-        startState()
     }
 
     fun startState() {
