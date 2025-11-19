@@ -51,10 +51,7 @@ fun Progresser(myViewModel: MyViewModel) {
     LinearProgressIndicator(
         progress = { progress.value },
         color = Color.Red,
-        trackColor = Color.DarkGray,
-        strokeCap = ProgressIndicatorDefaults.LinearStrokeCap,
-        modifier = Modifier,
-        gapSize = 12.dp
+        trackColor = Color.DarkGray
     )
 }
 @Composable

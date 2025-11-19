@@ -23,7 +23,7 @@ class MyViewModel : ViewModel() {
             stateStart()
         }
     }
-    fun stateStart() {
+    private fun stateStart() {
         currentState.value.onEnter()
     }
     fun simularLectura() {
