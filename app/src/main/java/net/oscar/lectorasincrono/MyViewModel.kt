@@ -13,20 +13,19 @@ class MyViewModel : ViewModel() {
     var progresoFlow: MutableStateFlow<Float> = MutableStateFlow(0.0f);
     var delay = 0
     init {
-        observarCambiosEstado()
+        stateStart()
     }
-    private fun observarCambiosEstado() {
-        viewModelScope.launch {
-            currentState.collect { state -> state.onEnter()}
-        }
-    }
+
     fun <T:Estados> changeState(newState: KClass<T>) {
         if (newState != currentState.value::class) {
             currentState.value.onExit()
             currentState.value = newState.constructors.first().call(this)
+            stateStart()
         }
     }
-
+    fun stateStart() {
+        currentState.value.onEnter()
+    }
     fun simularLectura() {
         changeState(Estados.CARGANDO::class)
         viewModelScope.launch {
