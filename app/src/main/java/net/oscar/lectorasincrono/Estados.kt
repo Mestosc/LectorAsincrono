@@ -20,7 +20,7 @@ sealed class Estados(val myViewModel: MyViewModel) {
      */
     class IDLE(myViewModel: MyViewModel) : Estados(myViewModel) {
         override fun onEnter() {
-            Log.d(stateTag,"Estado IDLE")
+            Log.d(stateTag,"Estado $this")
         }
 
         override fun onExit() {
@@ -33,7 +33,7 @@ sealed class Estados(val myViewModel: MyViewModel) {
      */
     class CARGANDO(myViewModel: MyViewModel) : Estados(myViewModel) {
         override fun onEnter() {
-            Log.d(stateTag,"Estado Cargando")
+            Log.d(stateTag,"Estado $this")
             myViewModel.progresoFlow.value = 0f
             myViewModel.delay = (1..5).random() * 1000
         }
@@ -45,7 +45,7 @@ sealed class Estados(val myViewModel: MyViewModel) {
 
     class FINALIZADO(myViewModel: MyViewModel) : Estados(myViewModel) {
         override fun onEnter() {
-            Log.d(stateTag,"Estado Finalizando")
+            Log.d(stateTag,"Estado $this")
         }
 
         override fun onExit() {
@@ -54,7 +54,7 @@ sealed class Estados(val myViewModel: MyViewModel) {
     }
     class ERROR(myViewModel: MyViewModel) : Estados(myViewModel) {
         override fun onEnter() {
-            Log.d(stateTag,"Estado ERROR")
+            Log.d(stateTag,"Estado $this")
         }
 
         override fun onExit() {
